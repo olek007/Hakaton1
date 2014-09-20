@@ -7,6 +7,7 @@ public class Kasa : MonoBehaviour {
 	public List<GameObject> ludkiWBazie;
 	float wartoscSmiecia = 1;
 	public GameObject[] player;
+	float timer=0;
 
 	void Start()
 	{
@@ -20,10 +21,8 @@ public class Kasa : MonoBehaviour {
 
 	void Update ()
 	{
-		for(int i=0;i<ludkiWBazie.Count;i++)
-		{
-			//ludkiWBazie[i].GetComponent<Plecak>()
-		}
+
+
 	}
 
 	void OnTriggerEnter(Collider col)
@@ -31,10 +30,27 @@ public class Kasa : MonoBehaviour {
 		ludkiWBazie.Add(col.gameObject);
 	}
 
-	void OnTriggerExit(Collider collider)
+	void OnTriggerExit(Collider col)
 	{
-		ludkiWBazie.Remove(collider.gameObject);
+		ludkiWBazie.Remove(col.gameObject);
 	}
+
+	void OnTriggerStay(Collider col)
+	{
+		for(int i=0;i<ludkiWBazie.Count;i++)
+		{
+			if(timer>=2f)
+			{
+				col.gameObject.GetComponent<Plecak>().aktualnaIloscSmieci--;
+			}
+		}
+		if(timer>2f)
+		{
+			timer=0f;
+		}
+		timer += Time.deltaTime;
+	}
+
 
 
 }

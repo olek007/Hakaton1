@@ -8,6 +8,7 @@ public class Boty : MonoBehaviour {
 	public GameObject baza;
 	float dystans;
 	int nrSmiecia=0;
+	bool czyZbierac=true;
 
 	void Start () 
 	{
@@ -19,28 +20,38 @@ public class Boty : MonoBehaviour {
 
 	void Update () 
 	{
-		if(gameObject.GetComponent<Plecak>().aktualnaIloscSmieci<gameObject.GetComponent<Plecak>().maxIloscSmieci)
+		if(czyZbierac)
 		{
-			dystans = Vector3.Distance(gameObject.transform.position,gameStatus.GetComponent<Spawning>().celeBotow[nrSmiecia].transform.position);
-			if(!agent.hasPath)
+			if(gameObject.GetComponent<Plecak>().aktualnaIloscSmieci<gameObject.GetComponent<Plecak>().maxIloscSmieci)
 			{
-				for(int i=0;i<gameStatus.GetComponent<Spawning>().celeBotow.Count;i++)
+				dystans = Vector3.Distance(gameObject.transform.position,gameStatus.GetComponent<Spawning>().celeBotow[nrSmiecia].transform.position);
+				if(!agent.hasPath)
 				{
-					if(Vector3.Distance(gameObject.transform.position,gameStatus.GetComponent<Spawning>().celeBotow[i].transform.position)<=dystans)
+					for(int i=0;i<gameStatus.GetComponent<Spawning>().celeBotow.Count;i++)
 					{
-						dystans = Vector3.Distance(gameObject.transform.position,gameStatus.GetComponent<Spawning>().celeBotow[i].transform.position);
-						nrSmiecia = i;
+						if(Vector3.Distance(gameObject.transform.position,gameStatus.GetComponent<Spawning>().celeBotow[i].transform.position)<=dystans)
+						{
+							dystans = Vector3.Distance(gameObject.transform.position,gameStatus.GetComponent<Spawning>().celeBotow[i].transform.position);
+							nrSmiecia = i;
+						}
+					}
+					if(dystans>1.0f)
+					{
+						agent.SetDestination(gameStatus.GetComponent<Spawning>().celeBotow[nrSmiecia].transform.position);
+						gameStatus.GetComponent<Spawning>().celeBotow.RemoveAt(nrSmiecia);
 					}
 				}
-				if(dystans>1.0f)
-				{
-					agent.SetDestination(gameStatus.GetComponent<Spawning>().celeBotow[nrSmiecia].transform.position);
-					gameStatus.GetComponent<Spawning>().celeBotow.RemoveAt(nrSmiecia);
-				}
+			}else
+			{
+				agent.SetDestination(baza.transform.position);
+				czyZbierac=false;
 			}
 		}else
 		{
-			agent.SetDestination(baza.transform.position);
+			if(gameObject.GetComponent<Plecak>().aktualnaIloscSmieci==0)
+			{
+				czyZbierac=true;
+			}
 		}
 	}
 }
