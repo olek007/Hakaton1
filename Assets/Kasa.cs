@@ -8,6 +8,8 @@ public class Kasa : MonoBehaviour {
 	float wartoscSmiecia = 1;
 	public GameObject[] player;
 	float timer=0;
+	public int iloscKasy=0;
+	float szybkoscOddawaniaSmieci=2.0f;
 
 	void Start()
 	{
@@ -27,6 +29,10 @@ public class Kasa : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
 	{
+		if(col.gameObject.tag=="Smiec")
+		{
+			Destroy(col.gameObject);
+		}
 		ludkiWBazie.Add(col.gameObject);
 	}
 
@@ -39,12 +45,13 @@ public class Kasa : MonoBehaviour {
 	{
 		for(int i=0;i<ludkiWBazie.Count;i++)
 		{
-			if(timer>=2f)
+			if(timer>=szybkoscOddawaniaSmieci && col.gameObject.GetComponent<Plecak>().aktualnaIloscSmieci>0)
 			{
+				iloscKasy+=(int)wartoscSmiecia;
 				col.gameObject.GetComponent<Plecak>().aktualnaIloscSmieci--;
 			}
 		}
-		if(timer>2f)
+		if(timer>szybkoscOddawaniaSmieci)
 		{
 			timer=0f;
 		}
