@@ -9,6 +9,7 @@ public class Postac : MonoBehaviour {
 	public Camera kamera;
 	Ray dest;
 
+
 	void Start()
 	{
 		agent=GetComponent<NavMeshAgent>();

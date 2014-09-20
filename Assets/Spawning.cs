@@ -15,7 +15,7 @@ public class Spawning : MonoBehaviour {
 	{
 		if(smieci.Count<maxSmieci)
 		{
-			nowySmiec = Instantiate(prefabSmieci,new Vector3(Random.Range(-wielkoscMapy,wielkoscMapy),0.5f,Random.Range(-wielkoscMapy,wielkoscMapy)),Quaternion.identity) as GameObject;
+			nowySmiec = Instantiate(prefabSmieci,new Vector3(Random.Range(-145,45),-2.0f,Random.Range(-45,40)),Quaternion.identity) as GameObject;
 			smieci.Add(nowySmiec);
 			celeBotow.Add(nowySmiec);
 		}

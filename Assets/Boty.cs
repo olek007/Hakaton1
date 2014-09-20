@@ -8,8 +8,6 @@ public class Boty : MonoBehaviour {
 	public GameObject baza;
 	float dystans;
 	int nrSmiecia=0;
-	public int aktualnaIloscSmieci=0;
-	public int maxIloscSmieci = 5;
 
 	void Start () 
 	{
@@ -21,7 +19,7 @@ public class Boty : MonoBehaviour {
 
 	void Update () 
 	{
-		if(aktualnaIloscSmieci<maxIloscSmieci)
+		if(gameObject.GetComponent<Plecak>().aktualnaIloscSmieci<gameObject.GetComponent<Plecak>().maxIloscSmieci)
 		{
 			dystans = Vector3.Distance(gameObject.transform.position,gameStatus.GetComponent<Spawning>().celeBotow[nrSmiecia].transform.position);
 			if(!agent.hasPath)

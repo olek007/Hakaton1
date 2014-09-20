@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed = 7;
+	public float speed = 12;
 	float pierwiastek_z_dwoch_przez_dwa = Mathf.Sqrt(2)/2;
 
 
