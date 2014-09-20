@@ -3,12 +3,9 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed = 4;
+	public float speed = 7;
 	float pierwiastek_z_dwoch_przez_dwa = Mathf.Sqrt(2)/2;
-	private Vector3 mouseScreen;
-	private Vector3 mouse;
-	public Camera kamera;
-	Transform rotacja;
+
 
 	void Update () 
 	{
@@ -52,18 +49,7 @@ public class PlayerController : MonoBehaviour {
 			gameObject.transform.rigidbody.velocity = new Vector3(speed,0, 0);
 		}
 
-		mouseScreen.x = Input.mousePosition.x;
-		mouseScreen.y = Input.mousePosition.y;
-		mouseScreen.z = Input.mousePosition.z;//Camera.current.gameObject.transform.position.y;//kamera.gameObject.transform.position.z;
-		mouse = kamera.ScreenToWorldPoint(mouseScreen);
-		Debug.Log(mouse);
-		gameObject.transform.LookAt(new Vector3(mouse.x,0,mouse.z));
-		rotacja.rotation = gameObject.transform.rotation;
-
-
-
-
-
+	
 
 	}
 
