@@ -2,20 +2,24 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Spawning : MonoBehaviour {
-
+public class Spawning : MonoBehaviour 
+{
 	public List<GameObject> smieci;
 	public List<GameObject> celeBotow;
 	public GameObject prefabSmieci;
-	//GameObject nowySmiec;
 	public int maxSmieci = 25;
-	public float wielkoscMapy = 45;
+	int randX;
+	int randY;
 
 	void Start()
 	{
 		for(int i=0;i<maxSmieci;i++)
 		{
-			GameObject nowySmiec = Instantiate(prefabSmieci,new Vector3(Random.Range(-145,45),-2.0f,Random.Range(-45,40)),Quaternion.identity) as GameObject;
+		do{
+			randX=Random.Range(-145,45);
+			randY=Random.Range(-45,40);
+			}while(randX>-145 &&randX<-92 && randY<40 && randY>23);
+			GameObject nowySmiec = Instantiate(prefabSmieci,new Vector3(randX,-2.0f,randY),Quaternion.identity) as GameObject;
 			smieci.Add(nowySmiec);
 			celeBotow.Add(nowySmiec);
 		}
@@ -31,8 +35,4 @@ public class Spawning : MonoBehaviour {
 			celeBotow.Add(nowySmiec);
 		}
 	}
-	//void usowanieZListy(GameObject objekt)
-	//{
-	//	smieci.Remove(objekt);
-	//}
 }

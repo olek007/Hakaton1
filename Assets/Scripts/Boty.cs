@@ -21,17 +21,16 @@ public class Boty : MonoBehaviour {
 
 	void Update () 
 	{
-		Debug.Log(agent.hasPath);
 		//(gameStatus.GetComponent<Spawning>().celeBotow.Count>=gameStatus.GetComponent<Spawning>().maxSmieci)//.
 		if(Time.time>3.0f)
 		{
 		if(czyZbierac)
-		{
+		{//gameObject.GetComponent<Plecak>().maxIloscSmieci
 			if(gameObject.GetComponent<Plecak>().aktualnaIloscSmieci<gameObject.GetComponent<Plecak>().maxIloscSmieci)
 			{
 				if(!agent.hasPath)
 				{
-						dystans = 1000000.0f;
+						dystans = 200000.0f;
 
 					
 						for(int i=0;i<gameStatus.GetComponent<Spawning>().celeBotow.Count;i++)
@@ -45,11 +44,7 @@ public class Boty : MonoBehaviour {
 							//nrSmiecia =Random.Range(0,gameStatus.GetComponent<Spawning>().celeBotow.Count);
 							agent.SetDestination(gameStatus.GetComponent<Spawning>().celeBotow[nrSmiecia].transform.position);
 							gameStatus.GetComponent<Spawning>().celeBotow.RemoveAt(nrSmiecia);
-					
-				}else 
-					{
-						agent.SetDestination(gameStatus.GetComponent<Spawning>().celeBotow[nrSmiecia].transform.position);
-					}
+				}
 			}else
 			{
 				agent.SetDestination(baza.transform.position);
@@ -60,6 +55,7 @@ public class Boty : MonoBehaviour {
 			if(gameObject.GetComponent<Plecak>().aktualnaIloscSmieci<=0)
 			{
 				czyZbierac=true;
+				agent.SetDestination(gameObject.transform.position);
 			}
 		}
 		}

@@ -17,12 +17,15 @@ public class Postac : MonoBehaviour {
 
 	void Update () 
 	{
-		if(Input.GetMouseButtonDown(0))
+		if (!Input.GetKey(KeyCode.Q))
 		{
-			dest = kamera.ScreenPointToRay(Input.mousePosition);
-			if(Physics.Raycast(dest,out hit))
+			if(Input.GetMouseButtonDown(0))
 			{
-				agent.SetDestination(hit.point);
+				dest = kamera.ScreenPointToRay(Input.mousePosition);
+				if(Physics.Raycast(dest,out hit))
+				{
+					agent.SetDestination(hit.point);
+				}
 			}
 		}
 	}

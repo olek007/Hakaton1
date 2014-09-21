@@ -10,7 +10,7 @@ public class czyszczenieMiasta : MonoBehaviour {
 		gameStatus = GameObject.FindWithTag("Respawn");
 	}
 
-	void OnTriggerEnter(Collider col)
+	/*void OnTriggerEnter(Collider col)
 	{
 		if(col.gameObject.tag=="Smiec")
 		{
@@ -18,5 +18,5 @@ public class czyszczenieMiasta : MonoBehaviour {
 			gameStatus.GetComponent<Spawning>().smieci.Remove(col.gameObject);
 			Destroy(col.gameObject);
 		}
-	}
+	}*/
 }
