@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -69,20 +70,32 @@ public class Kasa : MonoBehaviour
 
 	void dodawanieCzlowieka()
 	{
-		player = new GameObject[GameObject.FindGameObjectsWithTag("Player").Length];
+		Array.Resize<GameObject>(ref player, GameObject.FindGameObjectsWithTag("Player").Length);
+		//player = new GameObject[GameObject.FindGameObjectsWithTag("Player").Length];	
+		player[GameObject.FindGameObjectsWithTag("Player").Length - 1] = GameObject.FindGameObjectsWithTag("Player")[GameObject.FindGameObjectsWithTag("Player").Length - 1];
+		/*
 		for (int i = 0; i < player.Length; i++)
 		{
 			player[i] = GameObject.FindGameObjectsWithTag("Player")[i];
 		}
+		 * */
 	}
 
 	void dodawanieStrzalki()
 	{
+
+
+		Array.Resize<GameObject>(ref arrow, GameObject.FindGameObjectsWithTag("Arrow").Length);
+		//player = new GameObject[GameObject.FindGameObjectsWithTag("Player").Length];	
+		arrow[GameObject.FindGameObjectsWithTag("Arrow").Length - 1] = GameObject.FindGameObjectsWithTag("Arrow")[GameObject.FindGameObjectsWithTag("Arrow").Length - 1];
+		
+		/*
 		arrow = new GameObject[GameObject.FindGameObjectsWithTag("Arrow").Length];
 		for (int i = 0; i < arrow.Length; i++)
 		{
 			arrow[i] = GameObject.FindGameObjectsWithTag("Arrow")[i];
 		}
+		 * */
 	}
 
 }

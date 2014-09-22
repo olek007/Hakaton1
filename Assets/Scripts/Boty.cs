@@ -43,11 +43,6 @@ public class Boty : MonoBehaviour
 						gameStatus.GetComponent<Spawning>().celeBotow.RemoveAt(nrSmiecia);
 					}
 
-					if (!gameStatus.GetComponent<Spawning>().smieci[nrSmiecia].gameObject)
-					{
-						agent.SetDestination(gameObject.transform.position);
-					}
-
 					if(Vector3.Distance(gameObject.transform.position,agent.destination)<=2.0f)
 					{
 						agent.SetDestination(gameObject.transform.position);

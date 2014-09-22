@@ -7,7 +7,6 @@ public class Upgrade_menu : MonoBehaviour
 	public GameObject baza;
 	public Texture tekstura;
 	public GameObject human;
-	public GameObject arrow;
 	private int iloscLudzi = 0;
 	private int poziomPlecaka = 0;
 	private int poziomSzybkosci = 0;
@@ -45,9 +44,7 @@ public class Upgrade_menu : MonoBehaviour
 						baza.GetComponent<Kasa>().iloscKasy -= kosztCzlowieka;
 						kosztCzlowieka += Mathf.CeilToInt(kosztCzlowieka * 25 / 100);
 						Instantiate(human, baza.transform.position, Quaternion.identity);
-						Instantiate(arrow, baza.transform.position, Quaternion.identity);
 						baza.GetComponent<Kasa>().gameObject.SendMessage("dodawanieCzlowieka", SendMessageOptions.DontRequireReceiver);
-						baza.GetComponent<Kasa>().gameObject.SendMessage("dodawanieStrzalki", SendMessageOptions.DontRequireReceiver);
 					}
 				}
 
