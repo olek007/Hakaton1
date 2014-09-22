@@ -1,63 +1,73 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Boty : MonoBehaviour {
-
-	NavMeshAgent agent;
+public class Boty : MonoBehaviour
+{
+	
 	public GameObject gameStatus;
 	public GameObject baza;
-	float dystans;
-	int nrSmiecia=0;
-	bool czyZbierac=true;
+	private NavMeshAgent agent;
+	private bool czyZbierac = true;
+	private int nrSmiecia = 0;
+	private float dystans;
 
-	void Start () 
+	void Start()
 	{
-		agent=GetComponent<NavMeshAgent>();
+		agent = GetComponent<NavMeshAgent>();
 		gameStatus = GameObject.FindWithTag("Respawn");
 		baza = GameObject.FindWithTag("Finish");
 
 	}
-	
 
-	void Update () 
+
+	void Update()
 	{
-		//(gameStatus.GetComponent<Spawning>().celeBotow.Count>=gameStatus.GetComponent<Spawning>().maxSmieci)//.
-		if(Time.time>3.0f)
+		if (Time.time > 2.0f)
 		{
-		if(czyZbierac)
-		{//gameObject.GetComponent<Plecak>().maxIloscSmieci
-			if(gameObject.GetComponent<Plecak>().aktualnaIloscSmieci<gameObject.GetComponent<Plecak>().maxIloscSmieci)
+			if (czyZbierac)
 			{
-				if(!agent.hasPath)
+				if (gameObject.GetComponent<Plecak>().aktualnaIloscSmieci < gameObject.GetComponent<Plecak>().maxIloscSmieci)
 				{
+					if (!agent.hasPath)
+					{
 						dystans = 200000.0f;
-
-					
-						for(int i=0;i<gameStatus.GetComponent<Spawning>().celeBotow.Count;i++)
+						for (int i = 0; i < gameStatus.GetComponent<Spawning>().celeBotow.Count; i++)
 						{
-							if(Vector3.Distance(gameObject.transform.position,gameStatus.GetComponent<Spawning>().celeBotow[i].transform.position)<dystans)
+							if (Vector3.Distance(gameObject.transform.position, gameStatus.GetComponent<Spawning>().celeBotow[i].transform.position) < dystans)
 							{
-								dystans = Vector3.Distance(gameObject.transform.position,gameStatus.GetComponent<Spawning>().celeBotow[i].transform.position);
+								dystans = Vector3.Distance(gameObject.transform.position, gameStatus.GetComponent<Spawning>().celeBotow[i].transform.position);
 								nrSmiecia = i;
 							}
 						}
-							//nrSmiecia =Random.Range(0,gameStatus.GetComponent<Spawning>().celeBotow.Count);
-							agent.SetDestination(gameStatus.GetComponent<Spawning>().celeBotow[nrSmiecia].transform.position);
-							gameStatus.GetComponent<Spawning>().celeBotow.RemoveAt(nrSmiecia);
+						agent.SetDestination(gameStatus.GetComponent<Spawning>().celeBotow[nrSmiecia].transform.position);
+						gameStatus.GetComponent<Spawning>().celeBotow.RemoveAt(nrSmiecia);
+					}
+
+					if (!gameStatus.GetComponent<Spawning>().smieci[nrSmiecia].gameObject)
+					{
+						agent.SetDestination(gameObject.transform.position);
+					}
+
+					if(Vector3.Distance(gameObject.transform.position,agent.destination)<=2.0f)
+					{
+						agent.SetDestination(gameObject.transform.position);
+					}
 				}
-			}else
-			{
-				agent.SetDestination(baza.transform.position);
-				czyZbierac=false;
+				else
+				{
+					agent.SetDestination(baza.transform.position);
+					czyZbierac = false;
+				}
 			}
-		}else
-		{
-			if(gameObject.GetComponent<Plecak>().aktualnaIloscSmieci<=0)
+			else
 			{
-				czyZbierac=true;
-				agent.SetDestination(gameObject.transform.position);
+				if (gameObject.GetComponent<Plecak>().aktualnaIloscSmieci <= 0)
+				{
+					czyZbierac = true;
+					agent.SetDestination(gameObject.transform.position);
+				}
 			}
-		}
 		}
 	}
+
 }

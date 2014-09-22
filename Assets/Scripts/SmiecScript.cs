@@ -1,30 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SmiecScript : MonoBehaviour {
+public class SmiecScript : MonoBehaviour
+{
 
-	//public GameObject[] player;
 	public GameObject gameStatus;
 	public GameObject baza;
 
 	void Start()
 	{
-		/*player = new GameObject[GameObject.FindGameObjectsWithTag("Player").Length];
-		for(int i=0;i<player.Length;i++)
-		{
-			player[i] = GameObject.FindGameObjectsWithTag("Player")[i];
-		}*/
 		gameStatus = GameObject.FindWithTag("Respawn");
 		baza = GameObject.FindWithTag("Finish");
 	}
 
-	void Update () 
+	void Update()
 	{
-		for(int i=0;i<baza.GetComponent<Kasa>().player.Length;i++)
+		for (int i = 0; i < baza.GetComponent<Kasa>().player.Length; i++)
 		{
-			if(Vector3.Distance(baza.GetComponent<Kasa>().player[i].transform.position,gameObject.transform.position)<2.5f)
+			if (Vector3.Distance(baza.GetComponent<Kasa>().player[i].transform.position, gameObject.transform.position) < 2.5f)
 			{
-				if(baza.GetComponent<Kasa>().player[i].GetComponent<Plecak>().aktualnaIloscSmieci<baza.GetComponent<Kasa>().player[i].GetComponent<Plecak>().maxIloscSmieci)
+				if (baza.GetComponent<Kasa>().player[i].GetComponent<Plecak>().aktualnaIloscSmieci < baza.GetComponent<Kasa>().player[i].GetComponent<Plecak>().maxIloscSmieci)
 				{
 					baza.GetComponent<Kasa>().player[i].GetComponent<Plecak>().aktualnaIloscSmieci++;
 					gameStatus.GetComponent<Spawning>().smieci.Remove(gameObject);
@@ -35,4 +30,5 @@ public class SmiecScript : MonoBehaviour {
 			}
 		}
 	}
+
 }

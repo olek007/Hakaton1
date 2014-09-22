@@ -1,32 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Postac : MonoBehaviour {
+public class Postac : MonoBehaviour
+{
 
-	NavMeshAgent agent;
-	Vector3 mouseSkrin;
-	RaycastHit hit;
 	public Camera kamera;
-	Ray dest;
-
+	private NavMeshAgent agent;
+	private Ray dest;
+	private RaycastHit hit;
+	private Vector3 mouseSkrin;
 
 	void Start()
 	{
-		agent=GetComponent<NavMeshAgent>();
+		agent = GetComponent<NavMeshAgent>();
 	}
 
-	void Update () 
+	void Update()
 	{
 		if (!Input.GetKey(KeyCode.Q))
 		{
-			if(Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0))
 			{
 				dest = kamera.ScreenPointToRay(Input.mousePosition);
-				if(Physics.Raycast(dest,out hit))
+				if (Physics.Raycast(dest, out hit))
 				{
 					agent.SetDestination(hit.point);
 				}
 			}
 		}
 	}
+
 }

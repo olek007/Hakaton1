@@ -1,27 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Plecak : MonoBehaviour {
+public class Plecak : MonoBehaviour
+{
 
-	public int aktualnaIloscSmieci=0;
-	public int maxIloscSmieci=5;
 	public GameObject baza;
+	public int aktualnaIloscSmieci = 0;
+	public int maxIloscSmieci = 5;
 
-
-	void Start () 
+	void Start()
 	{
 		baza = GameObject.FindWithTag("Finish");
-		maxIloscSmieci=baza.GetComponent<Kasa>().player[0].GetComponent<Plecak>().maxIloscSmieci;
+		maxIloscSmieci = baza.GetComponent<Kasa>().player[0].GetComponent<Plecak>().maxIloscSmieci;
+		gameObject.GetComponent<NavMeshAgent>().speed = baza.GetComponent<Kasa>().player[0].gameObject.GetComponent<NavMeshAgent>().speed;
+		gameObject.GetComponent<NavMeshAgent>().acceleration = baza.GetComponent<Kasa>().player[0].gameObject.GetComponent<NavMeshAgent>().acceleration;
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	
-	}
-	
+
 	void iloscSmieciMax(int smieci)
 	{
 		maxIloscSmieci = smieci;
 	}
+
 }
